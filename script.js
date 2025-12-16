@@ -32,43 +32,16 @@ async function loadFormulasData() {
         init();
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
-        "formulas" = {
-            "img/form1.png": "Количество вещества",
-            "img/form2.png": "Молярная масса",
-            "img/form3.png": "Относительная молекулярная масса",
-            "img/form4.png": "Основное уравнение МКТ(1 мини)",
-            "img/form5.png": "Уравнение Клапейрона-Менделеева",
-            "img/form6.png": "Закон Дальтона",
-            "img/form7.png": "Концентрация",
-            "img/form8.png": "Основное уравнение МКТ(2 фулл)",
-            "img/form9.png": "Средняя энергия одной молекулы",
-            "img/form10.png": "Средняя скорость молекул",
-            "img/form11.png": "Вероятная скорость молекул",
-            "img/form12.png": "Молярная теплоёмкость при V=const",
-            "img/form13.png": "Молярная теплоёмкость при V=const",
-            "img/form14.png": "Уравнение Майера",
-            "img/form15.png": "Адиабатический процесс",
-            "img/form16.png": "Показатель степени адиабаты",
-            "img/form17.png": "Внутренняя энергия",
-            "img/form18.png": "Полная работа газа",
-            "img/form19.png": "Работа при изобарном процессе",
-            "img/form20.png": "Работа при изотермическом процессе",
-            "img/form21.png": "V=const",
-            "img/form22.png": "Работа при адиабатическом процессе",
-            "img/form23.png": "Адиабата",
-            "img/form24.png": "Изотермический",
-            "img/form25.png": "Изобарный",
-            "img/form26.png": "Объём",
-            "img/form27.png": "Первое начало термодинамики",
-            "img/form28.png": "КПЦ цикла",
-            "img/form29.png": "Энтропия по Клаузиусу",
-            "img/form30.png": "Барометрическая формула",
-            "img/form31.png": "Распределение Максвелла по скоростям",
-            "img/form32.png": "Число степеней свободы",
-            "img/form33.png": "Частота соударения",
-            "img/form34.png": "Период соударений",
-            "img/form35.png": "Длина свободного пробега молекул"
-        }
+        formulas = {
+            "img/form1.png": "Изобарный процесс",
+            "img/form2.png": "Адиабатический процесс",
+            "img/form3.png": "Уравнение Клапейрона-Менделеева",
+            "img/form4.png": "Первый закон термодинамики",
+            "img/form5.png": "Закон Ома для полной цепи",
+            "img/form6.png": "Второй закон Ньютона",
+            "img/form7.png": "Закон Кулона",
+            "img/form8.png": "Формула Эйнштейна"
+        };
         init();
     }
 }
@@ -201,7 +174,7 @@ function displayQuestion() {
         img.alt = "Формула";
         img.onerror = function() {
             this.onerror = null;
-            this.src = 'error';
+            this.src = 'https://via.placeholder.com/300x150/cccccc/333333?text=Изображение+не+найдено';
         };
         questionElement.innerHTML = '';
         questionElement.appendChild(img);
@@ -222,7 +195,7 @@ function displayAnswers() {
                 img.alt = "Вариант формулы";
                 img.onerror = function() {
                     this.onerror = null;
-                    this.src = 'error';
+                    this.src = 'https://via.placeholder.com/200x100/cccccc/333333?text=Изображение+не+найдено';
                 };
                 answerContent.appendChild(img);
             } else {
