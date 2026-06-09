@@ -55,6 +55,21 @@
                     </button>
                 </div>
             </div>
+
+            <div id="matchingModeContainer" style="display: none;">
+                <div class="matching-instructions">
+                    Перетащите формулы (справа) к соответствующим названиям (слева)
+                </div>
+                <div class="matching-board">
+                    <div class="matching-column JSON-titles" id="titlesCol">
+                        </div>
+                    <div class="matching-column JSON-dropzones" id="formulasCol">
+                        </div>
+                </div>
+                <button id="checkMatchingBtn" class="btn primary">
+                    <i class="fas fa-check-circle"></i> Проверить пары
+                </button>
+            </div>
             
             <div class="progress-container">
                 <div class="progress-bar">
@@ -62,6 +77,8 @@
                 </div>
                 <div class="progress-text" id="progressText">Прогресс: 0/0</div>
             </div>
+
+
         </main>
         
         <footer>
