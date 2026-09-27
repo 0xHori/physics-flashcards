@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточки для запоминания формул</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> Формулы по физике</h1>
+            <div class="controls">
+                <button id="toggleMode" class="btn">
+                    <i class="fas fa-exchange-alt"></i> Режим: Название → Формула
+                </button>
+                <button id="reset" class="btn secondary">
+                    <i class="fas fa-redo"></i> Начать заново
+                </button>
+                <!-- НОВАЯ КНОПКА СПРАВОЧНИКА -->
+                <button id="openGlossaryBtn" class="btn secondary glossary-btn" title="Открыть справочник формул">
+                    <i class="fas fa-book-open"></i> Справочник
+                </button>
+                <div class="stats" id="statsBox">
+                    <span id="score">0</span> из <span id="total">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Одиночные карточки -->
+            <div class="card-container">
+                <div class="card">
+                    <div class="question-container">
+                        <div id="question" class="question"></div>
+                    </div>
+
+                    <div class="answers-container">
+                        <div class="answers-grid">
+                            <div class="answer-option" data-index="0">
+                                <span class="key-hint">1</span>
+                                <div class="answer-content"></div>
+                            </div>
+                            <div class="answer-option" data-index="1">
+                                <span class="key-hint">2</span>
+                                <div class="answer-content"></div>
+                            </div>
+                            <div class="answer-option" data-index="2">
+                                <span class="key-hint">3</span>
+                                <div class="answer-content"></div>
+                            </div>
+                            <div class="answer-option" data-index="3">
+                                <span class="key-hint">4</span>
+                                <div class="answer-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback"></div>
+
+                    <button id="nextBtn" class="btn primary" disabled>
+                        <i class="fas fa-arrow-right"></i> Следующая карточка <span
+                            class="next-key-hint">[Пробел]</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Режим соответствий -->
+            <div id="matchingModeContainer" style="display: none;">
+                <div class="matching-instructions">
+                    Перетащите формулы (справа) к соответствующим названиям (слева)
+                </div>
+                <div class="matching-board">
+                    <div class="matching-column JSON-titles" id="titlesCol"></div>
+                    <div class="matching-column JSON-dropzones" id="formulasCol"></div>
+                </div>
+                <button id="checkMatchingBtn" class="btn primary">
+                    <i class="fas fa-check-circle"></i> Проверить пары
+                </button>
+            </div>
+
+            <!-- Режим экзаменационного билета (15 формул) -->
+            <div id="examModeContainer" style="display: none;">
+                <div class="exam-header">
+                    <h2><i class="fas fa-file-alt"></i> Экзаменационный билет</h2>
+                    <p class="exam-desc">Напишите ответы на бумаге или в полях, затем нажмите «Проверить билет» для
+                        самопроверки.</p>
+                </div>
+
+                <div id="examQuestionsList" class="exam-list"></div>
+
+                <div class="exam-actions">
+                    <button id="checkExamBtn" class="btn primary">
+                        <i class="fas fa-eye"></i> Проверить билет
+                    </button>
+                    <button id="finishExamBtn" class="btn secondary" style="display: none;">
+                        <i class="fas fa-check-double"></i> Завершить проверку
+                    </button>
+                </div>
+
+                <div id="examResult" class="exam-result" style="display: none;"></div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Прогресс: 0/0</div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Создано для изучения формул по физике</p>
+        </footer>
+    </div>
+
+
+    <!-- МОДАЛЬНОЕ ОКНО: СПРАВОЧНИК / ГЛОССАРИЙ -->
+    <div id="glossaryModal" class="modal-overlay" style="display: none;">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h2><i class="fas fa-book"></i> Справочник всех формул</h2>
+                <button id="closeGlossaryBtn" class="modal-close-btn">&times;</button>
+            </div>
+
+            <div class="modal-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="glossarySearch" placeholder="Поиск формулы по названию...">
+            </div>
+
+            <div class="modal-body" id="glossaryList">
+                <!-- Карточки будут сгенерированы через JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>
