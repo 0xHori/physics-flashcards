@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def generate_exam_ticket(
-    json_path="data.json", count=15, ticket_num=1, output_file="ticket.html"
+    json_path="data.json", count=68, ticket_num=1, output_file="ticket.html"
 ):
     with open(json_path, "r", encoding="utf-8") as f:
         formulas = json.load(f)["formulas"]

@@ -1,4 +1,4 @@
-let currentMode = 'textToImage'; // 'textToImage' | 'imageToText' | 'matching' | 'exam'
+let currentMode = 'textToFormula'; // 'textToFormula' | 'formulaToText' | 'matching' | 'exam'
 let formulas = {};
 let currentQuestion = null;
 let currentAnswers = [];
@@ -9,11 +9,10 @@ let totalQuestions = 0;
 let isAnswered = false;
 let usedQuestions = [];
 
-// Переменные для режима экзамена
-let examItems = []; // [{ img, title, userStatus: null }]
+let examItems = [];
 const EXAM_QUESTIONS_COUNT = 15;
 
-// DOM Элементы
+// DOM элементы
 const toggleModeBtn = document.getElementById('toggleMode');
 const resetBtn = document.getElementById('reset');
 const nextBtn = document.getElementById('nextBtn');
@@ -44,6 +43,13 @@ const glossaryModal = document.getElementById('glossaryModal');
 const glossaryList = document.getElementById('glossaryList');
 const glossarySearch = document.getElementById('glossarySearch');
 
+// Функция перерисовки формул через MathJax
+function typesetMath() {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise().catch((err) => console.log('MathJax error:', err));
+    }
+}
+
 async function loadFormulasData() {
     try {
         const response = await fetch('data.json');
@@ -73,14 +79,8 @@ function setupEventListeners() {
     closeGlossaryBtn.addEventListener('click', closeGlossary);
     glossarySearch.addEventListener('input', filterGlossary);
 
-    // Закрытие кликом вне модального окна или по нажатию Escape
     glossaryModal.addEventListener('click', (e) => {
         if (e.target === glossaryModal) closeGlossary();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && glossaryModal.style.display !== 'none') {
-            closeGlossary();
-        }
     });
 
     answerOptions.forEach(option => {
@@ -90,22 +90,22 @@ function setupEventListeners() {
             }
         });
     });
-    // Добавьте этот вызов внутрь функции setupEventListeners():
+
     document.addEventListener('keydown', handleKeyboardShortcuts);
 }
 
 function toggleMode() {
-    if (currentMode === 'textToImage') {
-        currentMode = 'imageToText';
+    if (currentMode === 'textToFormula') {
+        currentMode = 'formulaToText';
         toggleModeBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> Режим: Формула → Название';
-    } else if (currentMode === 'imageToText') {
+    } else if (currentMode === 'formulaToText') {
         currentMode = 'matching';
         toggleModeBtn.innerHTML = '<i class="fas fa-th-large"></i> Режим: Пары (Соответствия)';
     } else if (currentMode === 'matching') {
         currentMode = 'exam';
         toggleModeBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Режим: Экзаменационный билет';
     } else {
-        currentMode = 'textToImage';
+        currentMode = 'textToFormula';
         toggleModeBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> Режим: Название → Формула';
     }
     resetGame();
@@ -122,7 +122,6 @@ function resetGame() {
     feedbackElement.className = 'feedback';
     nextBtn.disabled = true;
 
-    // Скрываем все контейнеры
     cardContainer.style.display = 'none';
     matchingModeContainer.style.display = 'none';
     examModeContainer.style.display = 'none';
@@ -133,7 +132,7 @@ function resetGame() {
         loadMatchingRound();
     } else if (currentMode === 'exam') {
         examModeContainer.style.display = 'block';
-        progressContainer.style.display = 'none'; // У экзамена свой расчет
+        progressContainer.style.display = 'none';
         loadExamTicket();
     } else {
         cardContainer.style.display = 'block';
@@ -154,13 +153,17 @@ function loadNewQuestion() {
 
     if (Object.keys(formulas).length === 0) return;
 
-    let availableQuestions = (currentMode === 'textToImage')
-        ? Object.values(formulas).filter(val => !usedQuestions.includes(val))
-        : Object.keys(formulas).filter(key => !usedQuestions.includes(key));
+    // ВАЖНО: в режиме textToFormula вопрос — это НАЗВАНИЕ (ключ).
+    // В режиме formulaToText вопрос — это ФОРМУЛА (значение).
+    let availableQuestions = (currentMode === 'textToFormula')
+        ? Object.keys(formulas).filter(key => !usedQuestions.includes(key))
+        : Object.values(formulas).filter(val => !usedQuestions.includes(val));
 
     if (availableQuestions.length === 0) {
         usedQuestions = [];
-        availableQuestions = currentMode === 'textToImage' ? Object.values(formulas) : Object.keys(formulas);
+        availableQuestions = currentMode === 'textToFormula' 
+            ? Object.keys(formulas) 
+            : Object.values(formulas);
     }
 
     const randomIndex = Math.floor(Math.random() * availableQuestions.length);
@@ -177,16 +180,19 @@ function loadNewQuestion() {
 
 function generateAnswers() {
     currentAnswers = [];
-    if (currentMode === 'textToImage') {
-        const imagePath = Object.keys(formulas).find(key => formulas[key] === currentQuestion);
-        currentAnswers.push(imagePath);
-        const all = Object.keys(formulas).filter(p => p !== imagePath);
+
+    if (currentMode === 'textToFormula') {
+        // Вопрос — название (ключ). Правильный ответ — формула (значение).
+        const correctLatex = formulas[currentQuestion];
+        currentAnswers.push(correctLatex);
+        const all = Object.values(formulas).filter(v => v !== correctLatex);
         const shuffled = shuffleArray([...all]);
         for (let i = 0; i < 3 && i < shuffled.length; i++) currentAnswers.push(shuffled[i]);
     } else {
-        const correctAnswer = formulas[currentQuestion];
-        currentAnswers.push(correctAnswer);
-        const all = Object.values(formulas).filter(a => a !== correctAnswer);
+        // Вопрос — формула (значение). Правильный ответ — название (ключ).
+        const correctTitle = Object.keys(formulas).find(k => formulas[k] === currentQuestion);
+        currentAnswers.push(correctTitle);
+        const all = Object.keys(formulas).filter(k => k !== correctTitle);
         const shuffled = shuffleArray([...all]);
         for (let i = 0; i < 3 && i < shuffled.length; i++) currentAnswers.push(shuffled[i]);
     }
@@ -197,10 +203,13 @@ function generateAnswers() {
 }
 
 function displayQuestion() {
-    if (currentMode === 'textToImage') {
+    if (currentMode === 'textToFormula') {
+        // Показываем название
         questionElement.textContent = currentQuestion;
     } else {
-        questionElement.innerHTML = `<img src="${currentQuestion}" alt="Формула" onerror="this.src='https://via.placeholder.com/300x150?text=Нет+картинки'">`;
+        // Показываем формулу через MathJax
+        questionElement.innerHTML = `$$${currentQuestion}$$`;
+        typesetMath();
     }
 }
 
@@ -210,9 +219,11 @@ function displayAnswers() {
         answerContent.innerHTML = '';
         if (index < currentAnswers.length) {
             const answer = currentAnswers[index];
-            if (currentMode === 'textToImage') {
-                answerContent.innerHTML = `<img src="${answer}" alt="Вариант" onerror="this.src='https://via.placeholder.com/200x100?text=Нет+картинки'">`;
+            if (currentMode === 'textToFormula') {
+                // Ответ — формула через MathJax
+                answerContent.innerHTML = `$$${answer}$$`;
             } else {
+                // Ответ — название
                 answerContent.textContent = answer;
             }
             option.style.display = 'flex';
@@ -220,6 +231,7 @@ function displayAnswers() {
             option.style.display = 'none';
         }
     });
+    typesetMath();
 }
 
 function selectAnswer(index) {
@@ -241,10 +253,13 @@ function selectAnswer(index) {
         feedbackElement.textContent = "Правильно! ✓";
         feedbackElement.className = 'feedback correct';
     } else {
-        const rightText = (currentMode === 'textToImage')
-            ? formulas[currentAnswers[correctAnswerIndex]]
-            : currentAnswers[correctAnswerIndex];
-        feedbackElement.textContent = `Неправильно. Правильный ответ: ${rightText}`;
+        const rightAnswer = currentAnswers[correctAnswerIndex];
+        if (currentMode === 'textToFormula') {
+            feedbackElement.innerHTML = `Неправильно. Правильный ответ: $${rightAnswer}$`;
+            typesetMath();
+        } else {
+            feedbackElement.textContent = `Неправильно. Правильный ответ: ${rightAnswer}`;
+        }
         feedbackElement.className = 'feedback wrong';
     }
 
@@ -287,34 +302,39 @@ function loadMatchingRound() {
 
     const allKeys = Object.keys(formulas);
     const selectedKeys = shuffleArray(allKeys).slice(0, 4);
-    const pairs = selectedKeys.map(key => ({ img: key, text: formulas[key] }));
+    const pairs = selectedKeys.map(key => ({ title: key, latex: formulas[key] }));
 
     const shuffledTitles = shuffleArray([...pairs]);
     const shuffledFormulas = shuffleArray([...pairs]);
 
+    // Левая колонка: названия + пустые зоны
     shuffledTitles.forEach((pair, index) => {
         const row = document.createElement('div');
         row.className = 'match-row';
-        row.dataset.correctImg = pair.img;
+        row.dataset.correctTitle = pair.title;
         row.innerHTML = `
-            <div class="match-label">${pair.text}</div>
+            <div class="match-label">${pair.title}</div>
             <div class="dropzone" data-row-index="${index}"></div>
         `;
         titlesCol.appendChild(row);
     });
 
+    // Правая колонка: формулы для перетаскивания
     shuffledFormulas.forEach((pair, index) => {
         const zone = document.createElement('div');
         zone.className = 'dropzone storage-zone';
         zone.innerHTML = `
-            <div class="drag-item" draggable="true" id="drag-${index}" data-img-src="${pair.img}">
-                <img src="${pair.img}" alt="Формула">
+            <div class="drag-item" draggable="true" id="drag-${index}" data-title="${pair.title.replace(/"/g, '&quot;')}">
+                <div class="formula-render">$$${pair.latex}$$</div>
             </div>
         `;
         formulasCol.appendChild(zone);
     });
 
     initDragAndDrop();
+    
+    // Даём MathJax время на рендер
+    setTimeout(() => typesetMath(), 100);
 }
 
 function initDragAndDrop() {
@@ -358,7 +378,8 @@ checkMatchingBtn.addEventListener('click', () => {
             row.classList.add('wrong-pair');
             return;
         }
-        if (row.dataset.correctImg === placedItem.dataset.imgSrc) {
+        // Сравниваем по названию
+        if (row.dataset.correctTitle === placedItem.dataset.title) {
             row.classList.remove('wrong-pair');
             row.classList.add('correct-pair');
             placedItem.draggable = false;
@@ -388,9 +409,12 @@ checkMatchingBtn.addEventListener('click', () => {
         feedbackElement.textContent = `Угадано ${correctCount} из 4. Исправьте ошибки!`;
         feedbackElement.className = "feedback wrong";
     }
+    
+    // Перерисовываем формулы после всех изменений
+    setTimeout(() => typesetMath(), 50);
 });
 
-/* ================= ЛОГИКА РЕЖИМА ЭКЗАМЕНА (15 ФОРМУЛ) ================= */
+/* ================= ЛОГИКА РЕЖИМА ЭКЗАМЕНА ================= */
 
 function loadExamTicket() {
     examQuestionsList.innerHTML = '';
@@ -403,9 +427,9 @@ function loadExamTicket() {
     const selectedKeys = shuffleArray(allKeys).slice(0, EXAM_QUESTIONS_COUNT);
 
     examItems = selectedKeys.map(key => ({
-        img: key,
-        title: formulas[key],
-        userStatus: null // 'correct' | 'wrong' | null
+        title: key,
+        latex: formulas[key],
+        userStatus: null
     }));
 
     examItems.forEach((item, index) => {
@@ -423,7 +447,7 @@ function loadExamTicket() {
             <div class="exam-review-panel" id="review-panel-${index}">
                 <div class="exam-formula-preview">
                     <span>Эталон:</span>
-                    <img src="${item.img}" alt="Формула" onerror="this.src='https://via.placeholder.com/200x80?text=Нет+изображения'">
+                    <div class="formula-render">$$${item.latex}$$</div>
                 </div>
                 <div class="exam-vote-btns">
                     <button class="vote-btn pass" onclick="markExamItem(${index}, true)">✓ Верно</button>
@@ -433,18 +457,20 @@ function loadExamTicket() {
         `;
         examQuestionsList.appendChild(card);
     });
+
+    typesetMath();
 }
 
 function revealExamAnswers() {
     document.querySelectorAll('.exam-review-panel').forEach(panel => {
         panel.classList.add('visible');
     });
-    // Запрещаем редактирование инпутов после открытия ответов
     document.querySelectorAll('.exam-card-input').forEach(input => {
         input.disabled = true;
     });
     checkExamBtn.style.display = 'none';
     finishExamBtn.style.display = 'block';
+    typesetMath();
 }
 
 window.markExamItem = function (index, isCorrect) {
@@ -494,7 +520,6 @@ function calculateExamScore() {
         <div>Результат: <strong>${correctCount} из ${total}</strong> (${percentage}%)</div>
     `;
 
-    // Синхронизируем со счетчиком в шапке
     score = correctCount;
     totalQuestions = total;
     scoreElement.textContent = score;
@@ -505,7 +530,7 @@ function calculateExamScore() {
 
 document.addEventListener('DOMContentLoaded', loadFormulasData);
 
-/* ================= ЛОГИКА СПРАВОЧНИКА (ГЛОССАРИЯ) ================= */
+/* ================= ЛОГИКА СПРАВОЧНИКА ================= */
 
 function openGlossary() {
     glossaryModal.style.display = 'flex';
@@ -522,9 +547,9 @@ function renderGlossary(filterText = '') {
     glossaryList.innerHTML = '';
     const query = filterText.trim().toLowerCase();
 
-    const items = Object.entries(formulas); // [ [img_path, title], ... ]
+    const items = Object.entries(formulas); // [ [title, latex], ... ]
 
-    const filtered = items.filter(([img, title]) =>
+    const filtered = items.filter(([title]) =>
         title.toLowerCase().includes(query)
     );
 
@@ -533,17 +558,19 @@ function renderGlossary(filterText = '') {
         return;
     }
 
-    filtered.forEach(([img, title]) => {
+    filtered.forEach(([title, latex]) => {
         const card = document.createElement('div');
         card.className = 'glossary-card';
         card.innerHTML = `
             <div class="glossary-card-title">${title}</div>
             <div class="glossary-card-img-wrap">
-                <img src="${img}" alt="${title}" onerror="this.src='https://via.placeholder.com/150x60?text=Нет+картинки'">
+                <div class="formula-render">$$${latex}$$</div>
             </div>
         `;
         glossaryList.appendChild(card);
     });
+
+    typesetMath();
 }
 
 function filterGlossary(e) {
@@ -551,7 +578,6 @@ function filterGlossary(e) {
 }
 
 function handleKeyboardShortcuts(e) {
-    // Не перехватываем нажатия, если пользователь вводит текст в инпут
     const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
     if (activeTag === 'input' || activeTag === 'textarea') {
         if (e.key === 'Escape' && glossaryModal.style.display !== 'none') {
@@ -560,7 +586,6 @@ function handleKeyboardShortcuts(e) {
         return;
     }
 
-    // Клавиша G / п — открыть/закрыть справочник
     if (e.code === 'KeyG') {
         e.preventDefault();
         if (glossaryModal.style.display === 'none' || !glossaryModal.style.display) {
@@ -571,15 +596,12 @@ function handleKeyboardShortcuts(e) {
         return;
     }
 
-    // Закрытие справочника по Esc
     if (e.key === 'Escape' && glossaryModal.style.display !== 'none') {
         closeGlossary();
         return;
     }
 
-    // Горячие клавиши для режимов карточек (Текст → Формула и Формула → Текст)
-    if (currentMode === 'textToImage' || currentMode === 'imageToText') {
-        // Выбор варианта клавишами 1, 2, 3, 4
+    if (currentMode === 'textToFormula' || currentMode === 'formulaToText') {
         const keyMap = {
             'Digit1': 0, 'Numpad1': 0,
             'Digit2': 1, 'Numpad2': 1,
@@ -595,10 +617,9 @@ function handleKeyboardShortcuts(e) {
             return;
         }
 
-        // Переход к следующей карточке по Space, обычному Enter или Numpad Enter
         if (e.code === 'Space' || e.code === 'Enter' || e.code === 'NumpadEnter') {
             if (isAnswered && !nextBtn.disabled) {
-                e.preventDefault(); // чтобы пробел не скроллил страницу
+                e.preventDefault();
                 loadNewQuestion();
             }
         }

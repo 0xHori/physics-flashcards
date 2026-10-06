@@ -7,6 +7,21 @@
     <title>Карточки для запоминания формул</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ПОДКЛЮЧАЕМ MATHJAX -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -20,7 +35,6 @@
                 <button id="reset" class="btn secondary">
                     <i class="fas fa-redo"></i> Начать заново
                 </button>
-                <!-- НОВАЯ КНОПКА СПРАВОЧНИКА -->
                 <button id="openGlossaryBtn" class="btn secondary glossary-btn" title="Открыть справочник формул">
                     <i class="fas fa-book-open"></i> Справочник
                 </button>
@@ -62,8 +76,7 @@
                     <div class="feedback" id="feedback"></div>
 
                     <button id="nextBtn" class="btn primary" disabled>
-                        <i class="fas fa-arrow-right"></i> Следующая карточка <span
-                            class="next-key-hint">[Пробел]</span>
+                        <i class="fas fa-arrow-right"></i> Следующая карточка <span class="next-key-hint">[Пробел]</span>
                     </button>
                 </div>
             </div>
@@ -82,7 +95,7 @@
                 </button>
             </div>
 
-            <!-- Режим экзаменационного билета (15 формул) -->
+            <!-- Режим экзаменационного билета -->
             <div id="examModeContainer" style="display: none;">
                 <div class="exam-header">
                     <h2><i class="fas fa-file-alt"></i> Экзаменационный билет</h2>
@@ -117,8 +130,7 @@
         </footer>
     </div>
 
-
-    <!-- МОДАЛЬНОЕ ОКНО: СПРАВОЧНИК / ГЛОССАРИЙ -->
+    <!-- МОДАЛЬНОЕ ОКНО: СПРАВОЧНИК -->
     <div id="glossaryModal" class="modal-overlay" style="display: none;">
         <div class="modal-window">
             <div class="modal-header">
@@ -131,15 +143,11 @@
                 <input type="text" id="glossarySearch" placeholder="Поиск формулы по названию...">
             </div>
 
-            <div class="modal-body" id="glossaryList">
-                <!-- Карточки будут сгенерированы через JS -->
-            </div>
+            <div class="modal-body" id="glossaryList"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
-</html>
 
 </html>

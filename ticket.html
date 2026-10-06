@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Экзаменационный билет №1</title>
+
+<!-- ПОДКЛЮЧАЕМ MATHJAX -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; background: #fafafa; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    th, td { border: 1px solid #333; padding: 10px; vertical-align: middle; }
+    th { background: #e0e0e0; }
+    .num { width: 5%; text-align: center; font-weight: bold; }
+    .title { width: 45%; }
+    .formula-cell { width: 50%; text-align: center; font-size: 1.1em; }
+
+    .block-header {
+        background-color: #4a5568;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        padding: 12px;
+        border: 1px solid #333;
+    }
+    @media print {
+        button { display: none; }
+        body { padding: 0; background: #fff; }
+        .block-header { background-color: #ccc !important; color: #000 !important; -webkit-print-color-adjust: exact; }
+    }
+</style>
+</head>
+<body>
+    <button onclick="window.print()" style="margin-bottom:15px; padding:8px 16px; cursor:pointer; font-size:16px;">Распечатать билет</button>
+    <h2>Билет по физике (Формулы) — Вариант 1</h2>
+    <table>
+        <thead>
+            <tr><th>№</th><th>Название величины / закона</th><th>Формула</th></tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="3" class="block-header">БЛОК 1: Электростатика. База</td></tr>
+            <tr>
+                <td class="num">1</td>
+                <td class="title">Закон Кулона</td>
+                <td class="formula-cell">$$F = \frac{1}{4\pi\varepsilon_0} \frac{|q_1| |q_2|}{r^2}$$</td>
+            </tr>
+            <tr>
+                <td class="num">2</td>
+                <td class="title">Напряженность поля точечного заряда</td>
+                <td class="formula-cell">$$\vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^2} \vec{r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">3</td>
+                <td class="title">Потенциал поля точечного заряда</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">4</td>
+                <td class="title">Связь напряженности и потенциала</td>
+                <td class="formula-cell">$$\vec{E} = -\nabla\varphi$$</td>
+            </tr>
+            <tr>
+                <td class="num">5</td>
+                <td class="title">Интегральная связь поля и потенциала</td>
+                <td class="formula-cell">$$\varphi_1 - \varphi_2 = \int_{1}^{2} \vec{E} \cdot d\vec{l}$$</td>
+            </tr>
+            <tr>
+                <td class="num">6</td>
+                <td class="title">Теорема Гаусса в интегральной форме</td>
+                <td class="formula-cell">$$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{внутр}}}{\varepsilon_0}$$</td>
+            </tr>
+            <tr>
+                <td class="num">7</td>
+                <td class="title">Дипольный момент</td>
+                <td class="formula-cell">$$\vec{p} = q \vec{l}$$</td>
+            </tr>
+            <tr>
+                <td class="num">8</td>
+                <td class="title">Напряженность поля диполя</td>
+                <td class="formula-cell">$$\text{На оси: } \vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{2\vec{p}}{r^3} \quad \text{На перпендикуляре: } \vec{E} = -\frac{1}{4\pi\varepsilon_0} \frac{\vec{p}}{r^3}$$</td>
+            </tr>
+            <tr>
+                <td class="num">9</td>
+                <td class="title">Потенциал поля диполя</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{p \cos\theta}{r^2}$$</td>
+            </tr>
+            <tr>
+                <td class="num">10</td>
+                <td class="title">Момент сил, действующих на диполь</td>
+                <td class="formula-cell">$$\vec{M} = \vec{p} \times \vec{E}$$</td>
+            </tr>
+            <tr>
+                <td class="num">11</td>
+                <td class="title">Потенциальная энергия диполя</td>
+                <td class="formula-cell">$$W = -\vec{p} \cdot \vec{E} = -pE \cos\alpha$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 2: Электростатика. Проводники и поля</td></tr>
+            <tr>
+                <td class="num">12</td>
+                <td class="title">Напряженность поля бесконечной плоскости</td>
+                <td class="formula-cell">$$E = \frac{\sigma}{2\varepsilon_0}$$</td>
+            </tr>
+            <tr>
+                <td class="num">13</td>
+                <td class="title">Потенциал поля бесконечной плоскости</td>
+                <td class="formula-cell">$$\varphi = -\frac{\sigma}{2\varepsilon_0} x + C$$</td>
+            </tr>
+            <tr>
+                <td class="num">14</td>
+                <td class="title">Напряженность поля заряженной нити</td>
+                <td class="formula-cell">$$E = \frac{\tau}{2\pi\varepsilon_0 r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">15</td>
+                <td class="title">Потенциал поля заряженной нити</td>
+                <td class="formula-cell">$$\varphi = -\frac{\tau}{2\pi\varepsilon_0} \ln r + C$$</td>
+            </tr>
+            <tr>
+                <td class="num">16</td>
+                <td class="title">Напряженность поля на оси заряженного кольца</td>
+                <td class="formula-cell">$$E = \frac{1}{4\pi\varepsilon_0} \frac{q z}{(R^2 + z^2)^{3/2}}$$</td>
+            </tr>
+            <tr>
+                <td class="num">17</td>
+                <td class="title">Потенциал поля на оси заряженного кольца</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{\sqrt{R^2 + z^2}}$$</td>
+            </tr>
+            <tr>
+                <td class="num">18</td>
+                <td class="title">Напряженность поля проводящей сферы. Внутри сферы</td>
+                <td class="formula-cell">$$E = 0 \quad (r < R)$$</td>
+            </tr>
+            <tr>
+                <td class="num">19</td>
+                <td class="title">Потенциал поля проводящей сферы. Внутри сферы</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{R} = \text{const} \quad (r \le R)$$</td>
+            </tr>
+            <tr>
+                <td class="num">20</td>
+                <td class="title">Напряженность поля проводящей сферы. Снаружи сферы</td>
+                <td class="formula-cell">$$E = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^2} \quad (r > R)$$</td>
+            </tr>
+            <tr>
+                <td class="num">21</td>
+                <td class="title">Потенциал поля проводящей сферы. Снаружи сферы</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{r} \quad (r > R)$$</td>
+            </tr>
+            <tr>
+                <td class="num">22</td>
+                <td class="title">Напряженность поля равномерно заряженного шара. Внутри шара</td>
+                <td class="formula-cell">$$E = \frac{1}{4\pi\varepsilon_0} \frac{q r}{R^3} \quad (r < R)$$</td>
+            </tr>
+            <tr>
+                <td class="num">23</td>
+                <td class="title">Потенциал поля равномерно заряженного шара. Внутри шара</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q (3R^2 - r^2)}{2R^3} \quad (r \le R)$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 3: Электроемкость и Конденсаторы</td></tr>
+            <tr>
+                <td class="num">24</td>
+                <td class="title">Емкость проводящей сферы</td>
+                <td class="formula-cell">$$C = 4\pi\varepsilon_0 R$$</td>
+            </tr>
+            <tr>
+                <td class="num">25</td>
+                <td class="title">Энергия заряженной сферы</td>
+                <td class="formula-cell">$$W = \frac{q^2}{2C} = \frac{q^2}{8\pi\varepsilon_0 R}$$</td>
+            </tr>
+            <tr>
+                <td class="num">26</td>
+                <td class="title">Емкость плоского конденсатора</td>
+                <td class="formula-cell">$$C = \frac{\varepsilon\varepsilon_0 S}{d}$$</td>
+            </tr>
+            <tr>
+                <td class="num">27</td>
+                <td class="title">Емкость сферического конденсатора</td>
+                <td class="formula-cell">$$C = 4\pi\varepsilon\varepsilon_0 \frac{R_1 R_2}{R_2 - R_1}$$</td>
+            </tr>
+            <tr>
+                <td class="num">28</td>
+                <td class="title">Емкость цилиндрического конденсатора</td>
+                <td class="formula-cell">$$C = \frac{2\pi\varepsilon\varepsilon_0 l}{\ln(R_2 / R_1)}$$</td>
+            </tr>
+            <tr>
+                <td class="num">29</td>
+                <td class="title">Параллельное соединение конденсаторов</td>
+                <td class="formula-cell">$$C_{\text{общ}} = \sum C_i = C_1 + C_2 + \dots + C_n$$</td>
+            </tr>
+            <tr>
+                <td class="num">30</td>
+                <td class="title">Последовательное соединение конденсаторов</td>
+                <td class="formula-cell">$$\frac{1}{C_{\text{общ}}} = \sum \frac{1}{C_i} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n}$$</td>
+            </tr>
+            <tr>
+                <td class="num">31</td>
+                <td class="title">Связь напряженности и индукции электростатического поля в веществе</td>
+                <td class="formula-cell">$$\vec{D} = \varepsilon_0 \vec{E} + \vec{P} = \varepsilon\varepsilon_0 \vec{E}$$</td>
+            </tr>
+            <tr>
+                <td class="num">32</td>
+                <td class="title">Вектор поляризации</td>
+                <td class="formula-cell">$$\vec{P} = \frac{\sum \vec{p}_i}{V} = \chi \varepsilon_0 \vec{E}$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 4: Постоянный ток</td></tr>
+            <tr>
+                <td class="num">33</td>
+                <td class="title">Закон Ома для однородного участка цепи</td>
+                <td class="formula-cell">$$I = \frac{U}{R}$$</td>
+            </tr>
+            <tr>
+                <td class="num">34</td>
+                <td class="title">Закон Ома для замкнутой цепи</td>
+                <td class="formula-cell">$$I = \frac{\varepsilon}{R + r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">35</td>
+                <td class="title">Сопротивление проводника</td>
+                <td class="formula-cell">$$R = \rho \frac{l}{S} = \frac{1}{\gamma} \frac{l}{S}$$</td>
+            </tr>
+            <tr>
+                <td class="num">36</td>
+                <td class="title">Последовательное соединение резисторов</td>
+                <td class="formula-cell">$$R_{\text{общ}} = \sum R_i = R_1 + R_2 + \dots + R_n$$</td>
+            </tr>
+            <tr>
+                <td class="num">37</td>
+                <td class="title">Параллельное соединение резисторов</td>
+                <td class="formula-cell">$$\frac{1}{R_{\text{общ}}} = \sum \frac{1}{R_i} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$$</td>
+            </tr>
+            <tr>
+                <td class="num">38</td>
+                <td class="title">Закон Джоуля-Ленца</td>
+                <td class="formula-cell">$$Q = I^2 R t = U I t = \frac{U^2}{R} t$$</td>
+            </tr>
+            <tr>
+                <td class="num">39</td>
+                <td class="title">Мощность тока</td>
+                <td class="formula-cell">$$P = \frac{A}{t} = U I = I^2 R = \frac{U^2}{R}$$</td>
+            </tr>
+            <tr>
+                <td class="num">40</td>
+                <td class="title">Закон Ома в дифференциальной форме</td>
+                <td class="formula-cell">$$\vec{j} = \sigma \vec{E} = \gamma \vec{E}$$</td>
+            </tr>
+            <tr>
+                <td class="num">41</td>
+                <td class="title">Первое правило Кирхгофа</td>
+                <td class="formula-cell">$$\sum_k I_k = 0$$</td>
+            </tr>
+            <tr>
+                <td class="num">42</td>
+                <td class="title">Второе правило Кирхгофа</td>
+                <td class="formula-cell">$$\sum_k I_k R_k = \sum_k \varepsilon_k$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 5: Магнетизм. Источники поля</td></tr>
+            <tr>
+                <td class="num">43</td>
+                <td class="title">Закон Био-Савара-Лапласа</td>
+                <td class="formula-cell">$$d\vec{B} = \frac{\mu_0}{4\pi} \frac{I [d\vec{l} \times \vec{r}]}{r^3}$$</td>
+            </tr>
+            <tr>
+                <td class="num">44</td>
+                <td class="title">Индукция магнитного поля бесконечного прямого провода</td>
+                <td class="formula-cell">$$B = \frac{\mu_0 I}{2\pi r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">45</td>
+                <td class="title">Индукция магнитного поля провода конечной длины</td>
+                <td class="formula-cell">$$B = \frac{\mu_0 I}{4\pi r} (\cos\alpha_1 - \cos\alpha_2)$$</td>
+            </tr>
+            <tr>
+                <td class="num">46</td>
+                <td class="title">Поле в центре кругового витка</td>
+                <td class="formula-cell">$$B = \frac{\mu_0 I}{2R}$$</td>
+            </tr>
+            <tr>
+                <td class="num">47</td>
+                <td class="title">Поле соленоида (бесконечного или когда длина &gt;&gt; диаметра)</td>
+                <td class="formula-cell">$$B = \mu_0 n I$$</td>
+            </tr>
+            <tr>
+                <td class="num">48</td>
+                <td class="title">Поле на оси соленоида длины l и радиуса R</td>
+                <td class="formula-cell">$$B = \frac{\mu_0 n I}{2} (\cos\beta_1 - \cos\beta_2)$$</td>
+            </tr>
+            <tr>
+                <td class="num">49</td>
+                <td class="title">Поле тороида</td>
+                <td class="formula-cell">$$B = \frac{\mu_0 N I}{2\pi r}$$</td>
+            </tr>
+            <tr>
+                <td class="num">50</td>
+                <td class="title">Теорема о циркуляции вектора магнитной индукции</td>
+                <td class="formula-cell">$$\oint_L \vec{B} \cdot d\vec{l} = \mu_0 \sum I_k$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 6: Магнетизм. Действие поля</td></tr>
+            <tr>
+                <td class="num">51</td>
+                <td class="title">Поток магнитной индукции</td>
+                <td class="formula-cell">$$\Phi = \int_S \vec{B} \cdot d\vec{S} = B S \cos\alpha$$</td>
+            </tr>
+            <tr>
+                <td class="num">52</td>
+                <td class="title">Сила Ампера</td>
+                <td class="formula-cell">$$d\vec{F} = I [d\vec{l} \times \vec{B}]$$</td>
+            </tr>
+            <tr>
+                <td class="num">53</td>
+                <td class="title">Сила взаимодействия параллельных токов</td>
+                <td class="formula-cell">$$F = \frac{\mu_0 I_1 I_2}{2\pi d} l$$</td>
+            </tr>
+            <tr>
+                <td class="num">54</td>
+                <td class="title">Сила Лоренца</td>
+                <td class="formula-cell">$$\vec{F} = q (\vec{E} + [\vec{v} \times \vec{B}])$$</td>
+            </tr>
+            <tr>
+                <td class="num">55</td>
+                <td class="title">Момент сил на рамке</td>
+                <td class="formula-cell">$$\vec{M} = \vec{p}_m \times \vec{B} = I S [\vec{n} \times \vec{B}] \quad \Rightarrow \quad M = p_m B \sin\alpha$$</td>
+            </tr>
+            <tr>
+                <td class="num">56</td>
+                <td class="title">Намагниченность</td>
+                <td class="formula-cell">$$\vec{J} = \frac{\sum \vec{p}_m}{V}$$</td>
+            </tr>
+            <tr>
+                <td class="num">57</td>
+                <td class="title">Связь напряженности и индукции магнитного поля в веществе</td>
+                <td class="formula-cell">$$\vec{B} = \mu_0 (\vec{H} + \vec{J}) = \mu\mu_0 \vec{H}$$</td>
+            </tr>
+            <tr><td colspan="3" class="block-header">БЛОК 7: Электромагнитная индукция и Колебания</td></tr>
+            <tr>
+                <td class="num">58</td>
+                <td class="title">Закон Фарадея (электромагнитной индукции)</td>
+                <td class="formula-cell">$$\varepsilon_i = -\frac{d\Phi}{dt}$$</td>
+            </tr>
+            <tr>
+                <td class="num">59</td>
+                <td class="title">Индуктивность соленоида</td>
+                <td class="formula-cell">$$L = \mu\mu_0 n^2 V = \mu\mu_0 \frac{N^2}{l} S$$</td>
+            </tr>
+            <tr>
+                <td class="num">60</td>
+                <td class="title">Энергия катушки индуктивности</td>
+                <td class="formula-cell">$$W = \frac{L I^2}{2}$$</td>
+            </tr>
+            <tr>
+                <td class="num">61</td>
+                <td class="title">Энергия магнитного поля</td>
+                <td class="formula-cell">$$\text{Полная: } W = \frac{L I^2}{2} \quad \text{Плотность: } w = \frac{B^2}{2\mu\mu_0} = \frac{\mu\mu_0 H^2}{2}$$</td>
+            </tr>
+            <tr>
+                <td class="num">62</td>
+                <td class="title">Ток при размыкании цепи</td>
+                <td class="formula-cell">$$I = I_0 e^{-\frac{R}{L} t}$$</td>
+            </tr>
+            <tr>
+                <td class="num">63</td>
+                <td class="title">Ток при замыкании цепи</td>
+                <td class="formula-cell">$$I = I_0 \left(1 - e^{-\frac{R}{L} t}\right)$$</td>
+            </tr>
+            <tr>
+                <td class="num">64</td>
+                <td class="title">Циклическая частота колебательного контура</td>
+                <td class="formula-cell">$$\omega = \frac{1}{\sqrt{LC}}$$</td>
+            </tr>
+            <tr>
+                <td class="num">65</td>
+                <td class="title">Скорость электромагнитной волны</td>
+                <td class="formula-cell">$$v = \frac{1}{\sqrt{\varepsilon\varepsilon_0 \mu\mu_0}} = \frac{c}{\sqrt{\varepsilon\mu}}$$</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
