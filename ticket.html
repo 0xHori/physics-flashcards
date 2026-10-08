@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Экзаменационный билет №1</title>
+<title>Справочник всех формул</title>
 
 <!-- ПОДКЛЮЧАЕМ MATHJAX -->
 <script>
@@ -39,16 +39,75 @@ MathJax = {
         padding: 12px;
         border: 1px solid #333;
     }
+
+    /* ===== НАВИГАЦИЯ ===== */
+    .nav-bar {
+        max-width: 1200px;
+        margin: 0 auto 20px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-bar a {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+    }
+    .nav-bar a.home {
+        background: #f1f3f5;
+        color: #495057;
+        border-color: #dee2e6;
+    }
+    .nav-bar a.home:hover {
+        background: #e2e8f0;
+        transform: translateY(-2px);
+    }
+    .nav-bar a.ticket-link {
+        background: #f8f9fa;
+        color: #495057;
+        border-color: #dee2e6;
+    }
+    .nav-bar a.ticket-link:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+    .nav-bar a.home.active {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+    }
+
     @media print {
         button { display: none; }
+        .nav-bar { display: none; }
         body { padding: 0; background: #fff; }
         .block-header { background-color: #ccc !important; color: #000 !important; -webkit-print-color-adjust: exact; }
     }
 </style>
 </head>
 <body>
-    <button onclick="window.print()" style="margin-bottom:15px; padding:8px 16px; cursor:pointer; font-size:16px;">Распечатать билет</button>
-    <h2>Билет по физике (Формулы) — Вариант 1</h2>
+    <!-- НАВИГАЦИЯ -->
+    <nav class="nav-bar">
+        <a href="ticket.html" class="home active">🏠 Все формулы</a>
+        <a href="ticket1.html" class="ticket-link">Билет 1</a>
+        <a href="ticket2.html" class="ticket-link">Билет 2</a>
+        <a href="ticket3.html" class="ticket-link">Билет 3</a>
+        <a href="ticket4.html" class="ticket-link">Билет 4</a>
+    </nav>
+
+    <button onclick="window.print()" style="margin-bottom:15px; padding:8px 16px; cursor:pointer; font-size:16px;">Распечатать справочник</button>
+    <h2>Справочник всех формул по физике</h2>
     <table>
         <thead>
             <tr><th>№</th><th>Название величины / закона</th><th>Формула</th></tr>
@@ -63,7 +122,7 @@ MathJax = {
             <tr>
                 <td class="num">2</td>
                 <td class="title">Напряженность поля точечного заряда</td>
-                <td class="formula-cell">$$\vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^2} \vec{r}$$</td>
+                <td class="formula-cell">$$\vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{q}{r^3} \vec{r}$$</td>
             </tr>
             <tr>
                 <td class="num">3</td>
@@ -73,7 +132,7 @@ MathJax = {
             <tr>
                 <td class="num">4</td>
                 <td class="title">Связь напряженности и потенциала</td>
-                <td class="formula-cell">$$\vec{E} = -\nabla\varphi$$</td>
+                <td class="formula-cell">$$\vec{E} = -\text{grad } \varphi = -\nabla \varphi$$</td>
             </tr>
             <tr>
                 <td class="num">5</td>
@@ -338,7 +397,7 @@ MathJax = {
             <tr>
                 <td class="num">56</td>
                 <td class="title">Намагниченность</td>
-                <td class="formula-cell">$$\vec{J} = \frac{\sum \vec{p}_m}{V}$$</td>
+                <td class="formula-cell">$$\vec{J} = \frac{\sum \vec{p}_m}{V} = \chi \vec{H}$$</td>
             </tr>
             <tr>
                 <td class="num">57</td>
