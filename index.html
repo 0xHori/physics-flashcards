@@ -10,16 +10,16 @@
 
     <!-- ПОДКЛЮЧАЕМ MATHJAX -->
     <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -35,6 +35,12 @@
                 <button id="reset" class="btn secondary">
                     <i class="fas fa-redo"></i> Начать заново
                 </button>
+
+                <!-- 👇 НОВАЯ КНОПКА -->
+                <button id="openTicketsBtn" class="btn secondary" title="Открыть справочник билетов">
+                    <i class="fas fa-file-alt"></i> Билеты
+                </button>
+
                 <button id="openGlossaryBtn" class="btn secondary glossary-btn" title="Открыть справочник формул">
                     <i class="fas fa-book-open"></i> Справочник
                 </button>
@@ -76,7 +82,8 @@
                     <div class="feedback" id="feedback"></div>
 
                     <button id="nextBtn" class="btn primary" disabled>
-                        <i class="fas fa-arrow-right"></i> Следующая карточка <span class="next-key-hint">[Пробел]</span>
+                        <i class="fas fa-arrow-right"></i> Следующая карточка <span
+                            class="next-key-hint">[Пробел]</span>
                     </button>
                 </div>
             </div>

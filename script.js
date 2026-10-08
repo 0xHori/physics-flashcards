@@ -13,6 +13,7 @@ let examItems = [];
 const EXAM_QUESTIONS_COUNT = 15;
 
 // DOM элементы
+const openTicketsBtn = document.getElementById('openTicketsBtn');
 const toggleModeBtn = document.getElementById('toggleMode');
 const resetBtn = document.getElementById('reset');
 const nextBtn = document.getElementById('nextBtn');
@@ -81,6 +82,10 @@ function setupEventListeners() {
 
     glossaryModal.addEventListener('click', (e) => {
         if (e.target === glossaryModal) closeGlossary();
+    });
+
+    openTicketsBtn.addEventListener('click', () => {
+        window.open('ticket.html', '_blank');
     });
 
     answerOptions.forEach(option => {
@@ -161,8 +166,8 @@ function loadNewQuestion() {
 
     if (availableQuestions.length === 0) {
         usedQuestions = [];
-        availableQuestions = currentMode === 'textToFormula' 
-            ? Object.keys(formulas) 
+        availableQuestions = currentMode === 'textToFormula'
+            ? Object.keys(formulas)
             : Object.values(formulas);
     }
 
@@ -332,7 +337,7 @@ function loadMatchingRound() {
     });
 
     initDragAndDrop();
-    
+
     // Даём MathJax время на рендер
     setTimeout(() => typesetMath(), 100);
 }
@@ -409,7 +414,7 @@ checkMatchingBtn.addEventListener('click', () => {
         feedbackElement.textContent = `Угадано ${correctCount} из 4. Исправьте ошибки!`;
         feedbackElement.className = "feedback wrong";
     }
-    
+
     // Перерисовываем формулы после всех изменений
     setTimeout(() => typesetMath(), 50);
 });

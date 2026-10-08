@@ -1,104 +1,163 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<title>Справочник всех формул</title>
+    <meta charset="UTF-8">
+    <title>Справочник всех формул</title>
 
-<!-- ПОДКЛЮЧАЕМ MATHJAX -->
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- ПОДКЛЮЧАЕМ MATHJAX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; background: #fafafa; }
-    h2 { text-align: center; margin-bottom: 20px; }
-    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    th, td { border: 1px solid #333; padding: 10px; vertical-align: middle; }
-    th { background: #e0e0e0; }
-    .num { width: 5%; text-align: center; font-weight: bold; }
-    .title { width: 45%; }
-    .formula-cell { width: 50%; text-align: center; font-size: 1.1em; }
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+            background: #fafafa;
+        }
 
-    .block-header {
-        background-color: #4a5568;
-        color: #ffffff;
-        font-weight: bold;
-        text-align: center;
-        font-size: 1.1em;
-        letter-spacing: 1px;
-        padding: 12px;
-        border: 1px solid #333;
-    }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    /* ===== НАВИГАЦИЯ ===== */
-    .nav-bar {
-        max-width: 1200px;
-        margin: 0 auto 20px;
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 12px;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .nav-bar a {
-        display: inline-block;
-        padding: 8px 16px;
-        font-size: 14px;
-        font-weight: 600;
-        text-decoration: none;
-        border-radius: 8px;
-        transition: all 0.2s;
-        border: 2px solid transparent;
-    }
-    .nav-bar a.home {
-        background: #f1f3f5;
-        color: #495057;
-        border-color: #dee2e6;
-    }
-    .nav-bar a.home:hover {
-        background: #e2e8f0;
-        transform: translateY(-2px);
-    }
-    .nav-bar a.ticket-link {
-        background: #f8f9fa;
-        color: #495057;
-        border-color: #dee2e6;
-    }
-    .nav-bar a.ticket-link:hover {
-        background: #e9ecef;
-        transform: translateY(-2px);
-    }
-    .nav-bar a.home.active {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        color: #fff;
-        border-color: transparent;
-        box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    @media print {
-        button { display: none; }
-        .nav-bar { display: none; }
-        body { padding: 0; background: #fff; }
-        .block-header { background-color: #ccc !important; color: #000 !important; -webkit-print-color-adjust: exact; }
-    }
-</style>
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #e0e0e0;
+        }
+
+        .num {
+            width: 5%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .title {
+            width: 45%;
+        }
+
+        .formula-cell {
+            width: 50%;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .block-header {
+            background-color: #4a5568;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            padding: 12px;
+            border: 1px solid #333;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .nav-bar {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 12px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-bar a {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .nav-bar a.home {
+            background: #f1f3f5;
+            color: #495057;
+            border-color: #dee2e6;
+        }
+
+        .nav-bar a.home:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .nav-bar a.ticket-link {
+            background: #f8f9fa;
+            color: #495057;
+            border-color: #dee2e6;
+        }
+
+        .nav-bar a.ticket-link:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .nav-bar a.home.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+
+            .nav-bar {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+                background: #fff;
+            }
+
+            .block-header {
+                background-color: #ccc !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- НАВИГАЦИЯ -->
     <nav class="nav-bar">
+        <a href="index.html" class="home">🏠 Карточки</a>
         <a href="ticket.html" class="home active">🏠 Все формулы</a>
         <a href="ticket1.html" class="ticket-link">Билет 1</a>
         <a href="ticket2.html" class="ticket-link">Билет 2</a>
@@ -106,14 +165,21 @@ MathJax = {
         <a href="ticket4.html" class="ticket-link">Билет 4</a>
     </nav>
 
-    <button onclick="window.print()" style="margin-bottom:15px; padding:8px 16px; cursor:pointer; font-size:16px;">Распечатать справочник</button>
+    <button onclick="window.print()"
+        style="margin-bottom:15px; padding:8px 16px; cursor:pointer; font-size:16px;">Распечатать справочник</button>
     <h2>Справочник всех формул по физике</h2>
     <table>
         <thead>
-            <tr><th>№</th><th>Название величины / закона</th><th>Формула</th></tr>
+            <tr>
+                <th>№</th>
+                <th>Название величины / закона</th>
+                <th>Формула</th>
+            </tr>
         </thead>
         <tbody>
-            <tr><td colspan="3" class="block-header">БЛОК 1: Электростатика. База</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 1: Электростатика. База</td>
+            </tr>
             <tr>
                 <td class="num">1</td>
                 <td class="title">Закон Кулона</td>
@@ -142,7 +208,8 @@ MathJax = {
             <tr>
                 <td class="num">6</td>
                 <td class="title">Теорема Гаусса в интегральной форме</td>
-                <td class="formula-cell">$$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{внутр}}}{\varepsilon_0}$$</td>
+                <td class="formula-cell">$$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{внутр}}}{\varepsilon_0}$$
+                </td>
             </tr>
             <tr>
                 <td class="num">7</td>
@@ -152,7 +219,8 @@ MathJax = {
             <tr>
                 <td class="num">8</td>
                 <td class="title">Напряженность поля диполя</td>
-                <td class="formula-cell">$$\text{На оси: } \vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{2\vec{p}}{r^3} \quad \text{На перпендикуляре: } \vec{E} = -\frac{1}{4\pi\varepsilon_0} \frac{\vec{p}}{r^3}$$</td>
+                <td class="formula-cell">$$\text{На оси: } \vec{E} = \frac{1}{4\pi\varepsilon_0} \frac{2\vec{p}}{r^3}
+                    \quad \text{На перпендикуляре: } \vec{E} = -\frac{1}{4\pi\varepsilon_0} \frac{\vec{p}}{r^3}$$</td>
             </tr>
             <tr>
                 <td class="num">9</td>
@@ -169,7 +237,9 @@ MathJax = {
                 <td class="title">Потенциальная энергия диполя</td>
                 <td class="formula-cell">$$W = -\vec{p} \cdot \vec{E} = -pE \cos\alpha$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 2: Электростатика. Проводники и поля</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 2: Электростатика. Проводники и поля</td>
+            </tr>
             <tr>
                 <td class="num">12</td>
                 <td class="title">Напряженность поля бесконечной плоскости</td>
@@ -208,7 +278,8 @@ MathJax = {
             <tr>
                 <td class="num">19</td>
                 <td class="title">Потенциал поля проводящей сферы. Внутри сферы</td>
-                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{R} = \text{const} \quad (r \le R)$$</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q}{R} = \text{const} \quad (r \le
+                    R)$$</td>
             </tr>
             <tr>
                 <td class="num">20</td>
@@ -228,9 +299,12 @@ MathJax = {
             <tr>
                 <td class="num">23</td>
                 <td class="title">Потенциал поля равномерно заряженного шара. Внутри шара</td>
-                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q (3R^2 - r^2)}{2R^3} \quad (r \le R)$$</td>
+                <td class="formula-cell">$$\varphi = \frac{1}{4\pi\varepsilon_0} \frac{q (3R^2 - r^2)}{2R^3} \quad (r
+                    \le R)$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 3: Электроемкость и Конденсаторы</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 3: Электроемкость и Конденсаторы</td>
+            </tr>
             <tr>
                 <td class="num">24</td>
                 <td class="title">Емкость проводящей сферы</td>
@@ -264,19 +338,23 @@ MathJax = {
             <tr>
                 <td class="num">30</td>
                 <td class="title">Последовательное соединение конденсаторов</td>
-                <td class="formula-cell">$$\frac{1}{C_{\text{общ}}} = \sum \frac{1}{C_i} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n}$$</td>
+                <td class="formula-cell">$$\frac{1}{C_{\text{общ}}} = \sum \frac{1}{C_i} = \frac{1}{C_1} + \frac{1}{C_2}
+                    + \dots + \frac{1}{C_n}$$</td>
             </tr>
             <tr>
                 <td class="num">31</td>
                 <td class="title">Связь напряженности и индукции электростатического поля в веществе</td>
-                <td class="formula-cell">$$\vec{D} = \varepsilon_0 \vec{E} + \vec{P} = \varepsilon\varepsilon_0 \vec{E}$$</td>
+                <td class="formula-cell">$$\vec{D} = \varepsilon_0 \vec{E} + \vec{P} = \varepsilon\varepsilon_0
+                    \vec{E}$$</td>
             </tr>
             <tr>
                 <td class="num">32</td>
                 <td class="title">Вектор поляризации</td>
                 <td class="formula-cell">$$\vec{P} = \frac{\sum \vec{p}_i}{V} = \chi \varepsilon_0 \vec{E}$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 4: Постоянный ток</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 4: Постоянный ток</td>
+            </tr>
             <tr>
                 <td class="num">33</td>
                 <td class="title">Закон Ома для однородного участка цепи</td>
@@ -300,7 +378,8 @@ MathJax = {
             <tr>
                 <td class="num">37</td>
                 <td class="title">Параллельное соединение резисторов</td>
-                <td class="formula-cell">$$\frac{1}{R_{\text{общ}}} = \sum \frac{1}{R_i} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$$</td>
+                <td class="formula-cell">$$\frac{1}{R_{\text{общ}}} = \sum \frac{1}{R_i} = \frac{1}{R_1} + \frac{1}{R_2}
+                    + \dots + \frac{1}{R_n}$$</td>
             </tr>
             <tr>
                 <td class="num">38</td>
@@ -327,7 +406,9 @@ MathJax = {
                 <td class="title">Второе правило Кирхгофа</td>
                 <td class="formula-cell">$$\sum_k I_k R_k = \sum_k \varepsilon_k$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 5: Магнетизм. Источники поля</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 5: Магнетизм. Источники поля</td>
+            </tr>
             <tr>
                 <td class="num">43</td>
                 <td class="title">Закон Био-Савара-Лапласа</td>
@@ -368,7 +449,9 @@ MathJax = {
                 <td class="title">Теорема о циркуляции вектора магнитной индукции</td>
                 <td class="formula-cell">$$\oint_L \vec{B} \cdot d\vec{l} = \mu_0 \sum I_k$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 6: Магнетизм. Действие поля</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 6: Магнетизм. Действие поля</td>
+            </tr>
             <tr>
                 <td class="num">51</td>
                 <td class="title">Поток магнитной индукции</td>
@@ -392,7 +475,8 @@ MathJax = {
             <tr>
                 <td class="num">55</td>
                 <td class="title">Момент сил на рамке</td>
-                <td class="formula-cell">$$\vec{M} = \vec{p}_m \times \vec{B} = I S [\vec{n} \times \vec{B}] \quad \Rightarrow \quad M = p_m B \sin\alpha$$</td>
+                <td class="formula-cell">$$\vec{M} = \vec{p}_m \times \vec{B} = I S [\vec{n} \times \vec{B}] \quad
+                    \Rightarrow \quad M = p_m B \sin\alpha$$</td>
             </tr>
             <tr>
                 <td class="num">56</td>
@@ -404,7 +488,9 @@ MathJax = {
                 <td class="title">Связь напряженности и индукции магнитного поля в веществе</td>
                 <td class="formula-cell">$$\vec{B} = \mu_0 (\vec{H} + \vec{J}) = \mu\mu_0 \vec{H}$$</td>
             </tr>
-            <tr><td colspan="3" class="block-header">БЛОК 7: Электромагнитная индукция и Колебания</td></tr>
+            <tr>
+                <td colspan="3" class="block-header">БЛОК 7: Электромагнитная индукция и Колебания</td>
+            </tr>
             <tr>
                 <td class="num">58</td>
                 <td class="title">Закон Фарадея (электромагнитной индукции)</td>
@@ -423,7 +509,8 @@ MathJax = {
             <tr>
                 <td class="num">61</td>
                 <td class="title">Энергия магнитного поля</td>
-                <td class="formula-cell">$$\text{Полная: } W = \frac{L I^2}{2} \quad \text{Плотность: } w = \frac{B^2}{2\mu\mu_0} = \frac{\mu\mu_0 H^2}{2}$$</td>
+                <td class="formula-cell">$$\text{Полная: } W = \frac{L I^2}{2} \quad \text{Плотность: } w =
+                    \frac{B^2}{2\mu\mu_0} = \frac{\mu\mu_0 H^2}{2}$$</td>
             </tr>
             <tr>
                 <td class="num">62</td>
@@ -443,9 +530,11 @@ MathJax = {
             <tr>
                 <td class="num">65</td>
                 <td class="title">Скорость электромагнитной волны</td>
-                <td class="formula-cell">$$v = \frac{1}{\sqrt{\varepsilon\varepsilon_0 \mu\mu_0}} = \frac{c}{\sqrt{\varepsilon\mu}}$$</td>
+                <td class="formula-cell">$$v = \frac{1}{\sqrt{\varepsilon\varepsilon_0 \mu\mu_0}} =
+                    \frac{c}{\sqrt{\varepsilon\mu}}$$</td>
             </tr>
         </tbody>
     </table>
 </body>
+
 </html>
